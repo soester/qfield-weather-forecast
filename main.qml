@@ -69,6 +69,33 @@ Item {
         aboutDialog.open()
       }
     }
+
+    QfToolButton {
+      id: pressureButton
+      bgcolor: Theme.darkGraySemiOpaque
+      iconColor: "transparent"
+      width: 40
+      height: 40
+      padding: 0
+      round: true
+      font.pointSize: 10
+      font.bold: true
+
+      Label {
+        anchors.centerIn: parent
+        font.pointSize: 10
+        font.bold: true
+        color: "white"
+        style: Text.Outline
+        styleColor: Theme.darkGray
+
+        text: parent.text
+      }
+
+      onClicked: {
+        aboutDialog.open()
+      }
+    }
   }
 
   Timer {
@@ -102,6 +129,7 @@ Item {
           if (responseObject.hourly.time[i] > responseObject.current.time) {
             weatherForecastDrawer.iconSource = weatherCodeInformation[responseObject.hourly.weather_code[i]].day.image
             temperatureButton.text = responseObject.hourly.temperature_2m[i] + responseObject.hourly_units.temperature_2m
+            pressureButton.text = responseObject.hourly.surface_pressure[i] + responseObject.hourly_units.surface_pressure
             weatherForecastText = qsTr("Weather for the next hour:") + " " + weatherCodeInformation[responseObject.hourly.weather_code[i]].day.description
             mainWindow.displayToast(weatherForecastText)
             break
@@ -110,7 +138,7 @@ Item {
       }
     }
 
-    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=temperature_2m&hourly=temperature_2m,rain,weather_code,cloud_cover&forecast_days=2")
+    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=temperature_2m&current=surface_pressure&hourly=temperature_2m,rain,weather_code,cloud_cover&forecast_days=2")
     request.send();
   }
 

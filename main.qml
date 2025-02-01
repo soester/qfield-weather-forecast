@@ -138,7 +138,7 @@ Item {
       }
     }
 
-    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=temperature_2m&current=surface_pressure&hourly=temperature_2m,rain,weather_code,cloud_cover&forecast_days=2")
+    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=temperature_2m,surface_pressure&hourly=temperature_2m,rain,weather_code,cloud_cover&forecast_days=2")
     request.send();
   }
 

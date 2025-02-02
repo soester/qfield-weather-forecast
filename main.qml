@@ -128,8 +128,8 @@ Item {
         for (let i = 0; i < responseObject.hourly.time.length; i++) {
           if (responseObject.hourly.time[i] > responseObject.current.time) {
             weatherForecastDrawer.iconSource = weatherCodeInformation[responseObject.hourly.weather_code[i]].day.image
-            temperatureButton.text = responseObject.current.temperature_2m + responseObject.current_units.temperature_2m
-            pressureButton.text = responseObject.current.surface_pressure + responseObject.current_units.surface_pressure
+            temperatureButton.text = responseObject.hourly.temperature_2m[i] + responseObject.hourly_units.temperature_2m
+            pressureButton.text = responseObject.hourly.surface_pressure[i] + responseObject.hourly_units.surface_pressure
             weatherForecastText = qsTr("Weather for the next hour:") + " " + weatherCodeInformation[responseObject.hourly.weather_code[i]].day.description
             mainWindow.displayToast(weatherForecastText)
             break

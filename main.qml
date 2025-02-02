@@ -44,33 +44,6 @@ Item {
     round: true
 
     QfToolButton {
-      id: temperatureButton
-      bgcolor: Theme.darkGraySemiOpaque
-      iconColor: "transparent"
-      width: 40
-      height: 40
-      padding: 0
-      round: true
-      font.pointSize: 10
-      font.bold: true
-
-      Label {
-        anchors.centerIn: parent
-        font.pointSize: 10
-        font.bold: true
-        color: "white"
-        style: Text.Outline
-        styleColor: Theme.darkGray
-
-        text: parent.text
-      }
-
-      onClicked: {
-        aboutDialog.open()
-      }
-    }
-
-    QfToolButton {
       id: pressureButton
       bgcolor: Theme.darkGraySemiOpaque
       iconColor: "transparent"
@@ -128,7 +101,6 @@ Item {
         for (let i = 0; i < responseObject.hourly.time.length; i++) {
           if (responseObject.hourly.time[i] > responseObject.current.time) {
             weatherForecastDrawer.iconSource = weatherCodeInformation[responseObject.hourly.weather_code[i]].day.image
-            temperatureButton.text = responseObject.hourly.temperature_2m[i] + responseObject.hourly_units.temperature_2m
             pressureButton.text = responseObject.hourly.surface_pressure[i] + responseObject.hourly_units.surface_pressure
             weatherForecastText = qsTr("Weather for the next hour:") + " " + weatherCodeInformation[responseObject.hourly.weather_code[i]].day.description
             mainWindow.displayToast(weatherForecastText)

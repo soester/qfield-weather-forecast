@@ -44,7 +44,7 @@ Item {
     round: true
 
     QfToolButton {
-      id: pressureButton
+      id: temperatureButton
       bgcolor: Theme.darkGraySemiOpaque
       iconColor: "transparent"
       width: 40
@@ -101,7 +101,7 @@ Item {
         for (let i = 0; i < responseObject.hourly.time.length; i++) {
           if (responseObject.hourly.time[i] > responseObject.current.time) {
             weatherForecastDrawer.iconSource = weatherCodeInformation[responseObject.hourly.weather_code[i]].day.image
-            pressureButton.text = responseObject.hourly.surface_pressure[i] + responseObject.hourly_units.surface_pressure
+            temperatureButton.text = responseObject.hourly.surface_pressure[i] + responseObject.hourly_units.surface_pressure
             weatherForecastText = qsTr("Weather for the next hour:") + " " + weatherCodeInformation[responseObject.hourly.weather_code[i]].day.description
             mainWindow.displayToast(weatherForecastText)
             break
@@ -110,7 +110,7 @@ Item {
       }
     }
 
-    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=temperature_2m,surface_pressure&hourly=temperature_2m,surface_pressure,rain,weather_code,cloud_cover&forecast_days=2")
+    request.open("GET", "https://api.open-meteo.com/v1/forecast?latitude=" + info.latitude + "&longitude=" + info.longitude + "&current=surface_pressure&hourly=surface_pressure,rain,weather_code,cloud_cover&forecast_days=2")
     request.send();
   }
 
